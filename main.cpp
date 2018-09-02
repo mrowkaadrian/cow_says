@@ -36,17 +36,20 @@ void print_text(std::string text)
         print_lower_frame();
         return;
     }
-/*
-    std::string::iterator it;
-    std::string line = "";
-    int i = 0;
 
-    for(it = text.begin(); (it != text.end()) && (i < 40); ++it)
+    std::string::iterator it = text.begin();
+
+    while (it != text.end())
     {
-        line.push_back(*it);
-        ++i;
+        std::string line = "";
+        int i = 0;
+        for(; (it != text.end()) && (i < CLOUD_LENGTH); ++it, ++i)
+        {
+            line.push_back(*it);
+        }
+        print_line(line);
     }
-*/
+    print_lower_frame();
     //print upper frame
     //check length of the quote, if it has less than 40 characters -> print whole
         //else: print up to first space before 40th character + add ' ' to fill rest of the line
