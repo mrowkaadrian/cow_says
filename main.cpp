@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 
 void print_text(std::string);
 void print_cow();
@@ -56,13 +57,28 @@ void print_text(std::string text)
 
 void print_cow() 
 {
+    std::fstream cow;
+    std::string line;
+    cow.open("src/cow1.txt");
+
+    if (cow.is_open())
+    {
+        std::cout << '\n';
+        while (getline(cow, line))
+            std::cout << "    " << line << '\n';
+        
+        cow.close();
+    }
+    else
+        std::cout << "Can't open cow file!\n";
+
     //just print ascii "cow"
 }
 
 void print_upper_frame()
 {
     char h = 205, sw = 187, se = 201;
-    std::cout << se;
+    std::cout << ' ' << se;
     for (int i = 0; i < 40; ++i)
         std::cout << h; 
     std::cout << sw << '\n';
@@ -71,7 +87,7 @@ void print_upper_frame()
 void print_line(std::string text, int spaces)
 {
     char v = 186;
-    std::cout << v << text;
+    std::cout << ' ' << v << text;
     for (int i = 0; i < spaces; ++i)
         std::cout << ' ';
     std::cout << v << '\n';
@@ -79,12 +95,12 @@ void print_line(std::string text, int spaces)
 
 void print_lower_frame()
 {
-    char v = 186, h = 205, nw = 188, ne = 200;
-    std::cout << v << ' ';
+    char v = 186, h = 205, nw = 188, ne = 200, se = 201;
+    std::cout << ' ' << v << se;
     for (int i = 0; i < 39; ++i)
         std::cout << h; 
     std::cout << nw << '\n';
-    std::cout << v << "/\n";
+    std::cout << ' ' << '\\' << v << std::endl;
 }
 
 bool is_short(std::string text)
