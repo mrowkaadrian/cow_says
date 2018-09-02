@@ -11,8 +11,11 @@ int main()
 {
     std::string text;
 
-    std::cout << "Paste a quote: "
-    std::cin >> text;
+    std::cout << "Paste a quote: ";
+    getline(std::cin, text);
+
+    //test:
+    std::cout << text << "\n\n";
 
     print_text();
     print_cow();
