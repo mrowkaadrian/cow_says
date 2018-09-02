@@ -47,14 +47,20 @@ void print_text(std::string text)
         {
             line.push_back(*it);
         }
+        if (it != text.end())
+        {
+            int counter = 0; // it counts how many times iterator went back (to know how to resize string)
+            while (*it != ' ')
+            {
+                --it;
+                ++counter;
+            }
+            line.resize(line.length() - counter);
+            ++it; // we need to move iterator - we replaced space with new line, there is no need to place space again
+        }
         print_line(line);
     }
     print_lower_frame();
-    //print upper frame
-    //check length of the quote, if it has less than 40 characters -> print whole
-        //else: print up to first space before 40th character + add ' ' to fill rest of the line
-    //check length for rest of the quote
-    //do the same while there are any characters left
 }
 
 void print_cow() 
