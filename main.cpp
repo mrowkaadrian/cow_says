@@ -5,11 +5,13 @@
 #include <string>
 #include <fstream>
 
+#define CLOUD_LENGTH 25
+
 void print_text(std::string);
 void print_cow();
 bool is_short(std::string);
 void print_upper_frame();
-void print_line(std::string, int);
+void print_line(std::string);
 void print_lower_frame();
 
 int main()
@@ -19,21 +21,18 @@ int main()
     std::cout << "Type a quote: ";
     getline(std::cin, text);
 
-    //test:
-    std::cout << text << "\n\n";
-
     print_text(text);
     print_cow();
 }
 
 void print_text(std::string text)
 {
+    std::cout << "\n\n";
     print_upper_frame();
 
     if (is_short(text))
     {
-        int spaces = 40 - text.length();
-        print_line(text, spaces);
+        print_line(text);
         print_lower_frame();
         return;
     }
@@ -79,25 +78,23 @@ void print_upper_frame()
 {
     char h = 205, sw = 187, se = 201;
     std::cout << ' ' << se;
-    for (int i = 0; i < 40; ++i)
+    for (int i = 0; i < CLOUD_LENGTH; ++i)
         std::cout << h; 
     std::cout << sw << '\n';
 }
 
-void print_line(std::string text, int spaces)
+void print_line(std::string text)
 {
+    text.resize(CLOUD_LENGTH, ' ');
     char v = 186;
-    std::cout << ' ' << v << text;
-    for (int i = 0; i < spaces; ++i)
-        std::cout << ' ';
-    std::cout << v << '\n';
+    std::cout << ' ' << v << text << v << '\n';
 }
 
 void print_lower_frame()
 {
     char v = 186, h = 205, nw = 188, ne = 200, se = 201;
     std::cout << ' ' << v << se;
-    for (int i = 0; i < 39; ++i)
+    for (int i = 0; i < CLOUD_LENGTH-1; ++i)
         std::cout << h; 
     std::cout << nw << '\n';
     std::cout << ' ' << '\\' << v << std::endl;
@@ -105,7 +102,7 @@ void print_lower_frame()
 
 bool is_short(std::string text)
 {
-    if (text.size() > 40)
+    if (text.size() > CLOUD_LENGTH)
         return false;
     else
         return true;
